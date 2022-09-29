@@ -11,7 +11,7 @@ Select phenotype, run ukb_helper.py. Example: python ukb_helper.py pheno --out m
 Process your phenotype. Rename columns with actual phenotype names. Transform phenotype values.
 
 #### Step 3:
-Create unrelated individuals in the genotype file and then ectract those induviduals from the imputed files
+Create unrelated individuals in the genotype file and then extract those induviduals from the imputed files
 
 #### Step 4: 
 Run univariate gwas, create permuted genotype from the same input
