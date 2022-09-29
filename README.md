@@ -1,7 +1,4 @@
-# misc
-Misc of analysis
-
-### Running MOSTesT for UKB data
+### Running MOSTesT on the UKB data
 #### Step 1:
 Select phenotype, run ukb_helper.py. Example: python ukb_helper.py pheno --out my_pheno --input /cluster/projects/p33/s3-api/ukblake/phenotypes/*csv \n
 --fields 31 22001 22006 21022 30620 30600 --remove /cluster/projects/p33/s3-api/ukb_lake/participant_withdrawal/*csv
