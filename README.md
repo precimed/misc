@@ -17,4 +17,10 @@ Run univariate gwas, create permuted genotype from the same input
 Run univariate gwas on the permuted genotype
 
 #### Step 6:
-Dark....
+Extract zscore for all the phenotypes from both univariate and permuted gwas. We will end up with two tables which will be the input for the next step.
+
+#### Step 7:
+Run Mostest with the inputs from the previous step.
+
+#### Step 8:
+Clump the results with sumstats.py and then annotate the discovery.
