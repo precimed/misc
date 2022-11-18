@@ -11,7 +11,7 @@ process merge_1 {
 beforeScript 'source /cluster/projects/p33/users/mohammadzr/envs/nextf/bin/activate'
 module 'plink/1.90b6.2' 
 executor='slurm'
-queueSize='1'
+queueSize='22'
 jobName='merging'
 cpus='16'
 
@@ -39,7 +39,7 @@ process unrelate_1 {
 beforeScript 'source /cluster/projects/p33/users/mohammadzr/envs/nextf/bin/activate'
 module 'plink2/2.00a2LM'
 executor='slurm'
-queueSize='1'
+queueSize='22'
 jobName='unrel'
 cpus='16'
 clusterOptions  "-A p33 -t 242:00:00 --mem-per-cpu 16000M"
