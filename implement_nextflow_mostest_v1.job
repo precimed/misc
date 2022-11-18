@@ -17,9 +17,9 @@ export NXF_OFFLINE='TRUE'
 
 # Put this job script and the mostest_with_nextflow_v1.nf script in the same folder
 # Use actual phenotype and covariate files. Both absolute and relative path is ok.
-# Use you own project name and output directory
+# Use your own project name and output directory
 # It supposed to work. In case fails in any step check the slurm*out file, try to diagnose and resolve the issue and then submit the job again
-# The -resume parameter will be in effect in each rerun.
+# The -resume parameter will be in effect in each rerun. So, you will not lose any progress
 # It will create a lot of outputs in your out directory but only create "project_@.mat" in the /cluster/projects/p33/users/mohammadzr/metabolomics/scripts/mostest_code/ folder
 # Two files from out directory "variant_sample.csv", "bim_for_convert.bim" and the "project_@.mat" files from the above mentioned (/path/to/mostest_code) folder are the input for pvals2csv.py
 
