@@ -349,8 +349,8 @@ module 'MATLAB/2020b'
 executor='slurm'
 queueSize='2'
 jobName='mostest'
-cpus='8'
-clusterOptions  "-A p33 -t 2:00:00 --mem-per-cpu 8000M"
+cpus='16'
+clusterOptions  "-A p33 -t 2:00:00 --mem-per-cpu 16000M"
 
 publishDir params.out, mode:'copy'
 
