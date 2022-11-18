@@ -23,4 +23,10 @@ Extract zscore for all the phenotypes from both univariate and permuted gwas. We
 Run Mostest with the inputs from the previous step.
 
 #### Step 8:
+Convert the .mat output into csv using pvals2csv.py script
+
+#### Step 9:
 Clump the results with sumstats.py and then annotate the discovery.
+
+#### Nextflow pipeline for steps 3-8:
+The nextflow pipeline "mostest_with_nextflow_v1.nf" can be used to complete step 3 to 8 in one go. Read, modify and submit the "implement_nextflow_mostest_v1.job" to accomplish this pipeline. 
