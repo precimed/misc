@@ -22,5 +22,6 @@ export NXF_OFFLINE='TRUE'
 # The -resume parameter will be in effect in each rerun. So, you will not lose any progress
 # It will create a lot of outputs in your out directory but only create "project_@.mat" in the /cluster/projects/p33/users/mohammadzr/metabolomics/scripts/mostest_code/ folder
 # Two files from out directory "variant_sample.csv", "bim_for_convert.bim" and the "project_@.mat" files from the above mentioned (/path/to/mostest_code) folder are the input for pvals2csv.py
+# The job will also create an html file with the timeline for each process
 
 nextflow run mostest_with_nextflow_v1.nf --pheno ../liver/pheno/liver_pheno_test1.csv --out test_out --cov ../liver/pheno/liver_cov_test1.csv --project 'liver_test' -resume -with-timeline mostest_nextflow_report
