@@ -5,7 +5,7 @@ Select phenotype, run ukb_helper.py. Example: python ukb_helper.py pheno --out m
 
 
 #### Step 2:
-Process your phenotype. Rename columns with actual phenotype names. Transform phenotype values.
+Process your phenotype. Rename columns with actual phenotype names. Transform phenotype values. Make sure to replace any other name that indicates your subjects e.g. "eid" with "IID" and dublicate this column and name it "FID". "FID" and "IID" values has to be integer type.
 
 #### Step 3:
 Create unrelated individuals in the genotype file and then extract those induviduals from the imputed files
