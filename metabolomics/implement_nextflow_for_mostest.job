@@ -1,0 +1,28 @@
+#!/usr/bin/bash
+
+# Job name:
+#SBATCH --job-name=mostest_nf
+# Project:
+#SBATCH --account=p33
+# Wall clock limit:
+#SBATCH --time=292:20:00
+#SBATCH --cpus-per-task=16
+# Max memory usage:
+#SBATCH --mem-per-cpu=16GB
+
+module purge
+source /cluster/projects/p33/users/mohammadzr/envs/nextf/bin/activate
+module load java/jdk-11.0.1+13
+export NXF_OFFLINE='TRUE'
+
+# Put this job script and the mostest_with_nextflow_v1.nf script in the same folder
+# Use actual phenotype and covariate files. Both absolute and relative path is ok.
+# Use your own project name and output directory
+# It supposed to work. In case fails in any step check the slurm*out file, try to diagnose and resolve the issue and then submit the job again
+# The -resume parameter will be in effect in each rerun. So, you will not lose any progress
+# It will create a lot of outputs in your out directory but only create "project_@.mat" in the /cluster/projects/p33/users/mohammadzr/metabolomics/scripts/mostest_code/ folder
+# Two files from out directory "variant_sample.csv", "bim_for_convert.bim" and the "project_@.mat" files from the above mentioned (/path/to/mostest_code) folder are the input for pvals2csv.py
+# The job will also create an html file with the timeline for each process
+# The pheotype name must not contain any dot (.) but it can contain dash (-) or underscore (_)
+
+nextflow run mostest_with_nextflow_v1.nf --pheno ../liver/pheno/liver_pheno_test1.csv --out test_out --cov ../liver/pheno/liver_cov_test1.csv --project 'liver_test' -resume -with-timeline mostest_nextflow_report
