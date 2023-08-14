@@ -13,4 +13,7 @@ set -o errexit
 module purge
 module load MATLAB/2020b
 
-matlab -nodisplay -nosplash -batch "zmat_orig_file='/cluster/projects/p33/users/mohammadzr/metabolomics/lipids/europeans/zscores/glm_original_combined_zscore.csv_ordered_cols_nona.csv';zmat_perm_file='/cluster/projects/p33/users/mohammadzr/metabolomics/lipids/europeans/zscores/glm_permuted_combined_zscore.csv_ordered_cols_nona.csv'; num_eigval_to_keep=${SLURM_ARRAY_TASK_ID}; out='nmr_eur_${SLURM_ARRAY_TASK_ID}'; run /cluster/projects/p33/users/mohammadzr/metabolomics/scripts/mostest_code/mostest_mental; exit";
+matlab -nodisplay -nosplash -batch "zmat_orig_file='/cluster/projects/p33/users/mohammadzr/metabolomics/lipids/europeans/zscores/glm_original_combined_zscore.csv_ordered_cols_nona.csv';\n
+zmat_perm_file='/cluster/projects/p33/users/mohammadzr/metabolomics/lipids/europeans/zscores/glm_permuted_combined_zscore.csv_ordered_cols_nona.csv';\n
+num_eigval_to_keep=${SLURM_ARRAY_TASK_ID}; out='nmr_eur_${SLURM_ARRAY_TASK_ID}';\n
+run /cluster/projects/p33/users/mohammadzr/metabolomics/scripts/mostest_code/mostest_mental; exit";
