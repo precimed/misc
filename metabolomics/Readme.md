@@ -12,10 +12,10 @@ Create your covariate csv file, e.g. age, sex, 20 genetic principal components: 
 Process your phenotype. Rename columns with actual phenotype names. Make sure to replace any other name that indicates your subjects e.g. "eid" with "IID" and dublicate this column and name it "FID". "FID" and "IID" values has to be integer type. Phenotype csv file must be tab or space delimited. Transform phenotype values by Rank-Based Inverse Normal Transformation.  
 
 #### Step 3:
-Create unrelated individuals in the genotype file and then extract those induviduals from the imputed files
+Create unrelated individuals (king cutoff 0.05) in the genotype file and then extract those induviduals from the imputed files
 
 #### Step 4: 
-Run univariate gwas, create permuted genotype from the same input
+Run univariate gwas, create permuted genotype from the same input (creating chunks of 10K snps would be helpful before this)
 
 #### Step 5:
 Run univariate gwas on the permuted genotype
