@@ -15,7 +15,7 @@ Process your phenotype. Rename columns with actual phenotype names. Make sure to
 Create unrelated individuals (king cutoff 0.05) in the genotype file and then extract those induviduals from the imputed files
 
 #### Step 4: 
-Run univariate gwas, create permuted genotype from the same input (creating chunks of 10K snps would be helpful before this)
+Run univariate gwas, create permuted genotype (https://github.com/precimed/mostest/blob/mental/mental/permute_bed.py) from the same input (creating chunks of 10K snps using make_chunks_by_snps.py script would be helpful before this)
 
 #### Step 5:
 Run univariate gwas on the permuted genotype
