@@ -3,10 +3,10 @@
 https://docs.google.com/document/d/1b8a1E55k6djyzuFkl1uU7e8Z6SvJtUMU2aAQ1WtjOjg/edit#heading=h.qjp0rbtewqb
 ### Running MOSTesT on the UKB data
 #### Step 1:
-Select phenotypes and create phenotypes csv file by running ukb_helper.py. Example: python ukb_helper.py pheno --out my_pheno --input /cluster/projects/p33/s3-api/ukblake/phenotypes/*csv \n
---fields 23474 23475 23476 23477 --remove /cluster/projects/p33/s3-api/ukb_lake/participant_withdrawal/*csv
+Select phenotypes and create phenotypes csv file by running ukb_helper.py. Example: python ukb_helper.py pheno --out my_pheno --input /ess/p33/data/durable/s3-api/ukblake/phenotypes/*csv \n
+--fields 23474 23475 23476 23477 --remove /ess/p33/data/durable/s3-api/ukb_lake/participant_withdrawal/*csv
 
-Create your covariate csv file, e.g. age, sex, 10 genetic principal components: python ukb_helper.py pheno --input /cluster/projects/p33/s3-api/ukblake/phenotypes/*csv --fields 21022 31 22009 --out my_cov
+Create your covariate csv file, e.g. age, sex, 10 genetic principal components: python ukb_helper.py pheno --input /ess/p33/data/durable/s3-api/ukblake/phenotypes/*csv --fields 21022 31 22009 --out my_cov
 
 #### Step 2:
 Process your phenotype. Rename columns with actual phenotype names. Make sure to replace any other name that indicates your subjects e.g. "eid" with "IID" and dublicate this column and name it "FID". "FID" and "IID" values has to be integer type. Phenotype csv file must be tab or space delimited. Transform phenotype values by Rank-Based Inverse Normal Transformation.  
