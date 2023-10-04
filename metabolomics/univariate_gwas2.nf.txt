@@ -1,0 +1,584 @@
+//Lets declare inputs via channels
+nextflow.enable.dsl=1
+bgen_files=Channel.fromFilePairs("/ess/p33/data/durable/s3-api/ukblake/genetics/imp/ukb_imp_chr*_v3.bgen",size:1).map {group_key,file_list -> tuple(group_key.replaceFirst(/^*ukb_imp_/,""),file_list.first())}
+sample_files=Channel.fromPath("/ess/p33/data/durable/s3-api/ukblake/genetics/imp/ukb27412_imp_chr1_v3_s487395.sample")
+Channel.fromPath("${params.pheno}").into{pheno1;pheno2;pheno3;pheno4}
+Channel.fromPath("${params.cov}").into{cov1;cov2;cov3}
+merging_list=Channel.fromPath("/cluster/projects/p33/users/mohammadzr/metabolomics/liver/pheno/merge_list_for_relatedness.txt")
+unrelated_ind=Channel.from("unrelated_geno")
+
+/*
+process merge_genotype {
+ 
+executor='slurm'
+queueSize='22'
+jobName='merging'
+cpus='16'
+
+clusterOptions  "-A p33 -t 24:00:00 --mem-per-cpu 16000M"
+
+publishDir params.out, mode:'copy'
+
+input:
+file merge_in from merging_list
+file pheno from pheno1
+
+
+output:
+set path("*.bed"), path("*.bim"), path("*.fam") into merged
+
+script:
+outPrefix = 'merged_geno'
+
+"""
+plink --merge-list ${merge_in} --threads 16 --keep ${pheno} --make-bed --out ${outPrefix}
+"""
+}
+
+process unrelated_individuals {
+
+executor='slurm'
+queueSize='22'
+jobName='unrel'
+cpus='16'
+clusterOptions  "-A p33 -t 96:00:00 --mem-per-cpu 32000M"
+
+publishDir params.out, mode:'copy'
+
+input:
+file merge_in2 from merged
+
+output:
+path("*.fam") into unrelated1,unrelated2
+
+script:
+outPrefix = 'unrelated_individual'
+inprefix = 'merged_geno'
+"""
+plink2 --bfile ${inprefix} --king-cutoff 0.05 --make-just-fam --out ${outPrefix} --threads 16 --memory 31000
+"""
+}
+
+Channel.fromList(['chr1','chr2','chr3','chr4','chr5','chr6','chr7','chr8','chr9','chr10','chr11','chr12','chr13','chr14','chr15','chr16','chr17','chr18','chr19','chr20','chr21','chr22']).into {chrom1;chrom2}
+channel.fromPath("${params.out}/unrelated_individual.fam").set {unrelated1}
+bgen_files.combine(sample_files).combine(unrelated1).groupTuple().set {bgen1}
+chrom1.join(bgen1).into{bgen2;bgen3;bgen4}
+
+
+process extracting_bgen {
+
+executor='slurm'
+queueSize='22'
+jobName='extraction'
+cpus='8'
+clusterOptions  "-A p33 -t 24:00:00 --mem-per-cpu 16000M"
+
+publishDir params.out, mode:'copy'
+
+input:
+tuple val(chr),path(bgen),path(sample),path(fam) from bgen2
+
+output:
+tuple val("${chr}"),path("${chr}*.*") optional true into extracted_imp1,extracted_imp2,extracted_imp3
+
+script:
+
+"""
+plink2 --bgen ${bgen} ref-first --sample ${sample} --keep ${fam} --mac 20 --make-bed --out "${chr}_unrelated_imp" --threads 8
+"""
+}
+
+//ch_unrel=Channel.fromFilePairs("/cluster/projects/p33/users/mohammadzr/metabolomics/lipids/combined/unrelated/*unrelated_imp.{bed,bim,fam}",size:3)
+extracted_imp1.combine(pheno2).set{ch_unrel2}
+
+process extracting_unrel {
+
+executor='slurm'
+queueSize='22'
+jobName='unrel1'
+cpus='8'
+clusterOptions  "-A p33 -t 24:00:00 --mem-per-cpu 16000M"
+
+publishDir params.out2, mode:'copy'
+
+input:
+tuple val(chr),path(bfiles),path(pheno) from ch_unrel2
+
+output:
+tuple val("${chr}"),path("${chr}*.*") optional true into imp_unrel1,imp_unrel2,imp_unrel3
+
+script:
+def (beds, bims, fams, logs) = bfiles
+"""
+plink2 --bed ${beds} --bim ${bims} --fam ${fams} --keep ${pheno} --mac 20 --maf 0.05 --rm-dup 'force-first' --make-bed --out ${chr}_unrelated_nodup --threads 8 --memory 15000
+"""
+}
+
+process creating_chunk {
+executor='slurm'
+queueSize='22'
+jobName='chunking'
+cpus='2'
+clusterOptions  "-A p33 -t 6:00:00 --mem-per-cpu 4000M"
+
+publishDir params.out, mode:'copy'
+
+input:
+tuple val(chr),path(bfiles) from imp_unrel1
+
+output:
+tuple val("${chr}"),path("${chr}*.*") optional true into chunks1
+
+script:
+def (beds, bims, fams, logs) = bfiles
+"""
+python /cluster/projects/p33/users/mohammadzr/metabolomics/scripts/make_chunks_by_snps.py ${bims}
+"""
+}
+chunks2=chunks1.transpose()
+chunks2.combine(imp_unrel2,by:0).set {chunks3}
+
+process chunks_to_plink {
+
+executor='slurm'
+queueSize='2002'
+submitRateLimit='500sec'
+jobName='chunk2plink'
+cpus='4'
+clusterOptions  "-A p33 -t 2:00:00 --mem-per-cpu 2000M"
+
+publishDir params.out, mode:'copy'
+
+input:
+tuple val(chr),path(chunk),path(bfiles) from chunks3
+
+output:
+tuple val("${chr}"),path("${chr}*.*") optional true into chunks4,chunks5
+
+script:
+def (bed,bim,fam,log) = bfiles
+"""
+plink --bed ${bed} --bim ${bim} --fam ${fam} --extract ${chunk} --make-bed --out "${chunk}" --threads 4
+"""
+}
+
+Channel.fromFilePairs("${params.out}/c*chunk*csv*.{bed,bim,fam}",size:3).map{group_key,file_list -> tuple(group_key.replaceAll(/^*\.chunk*\.csv/,""),file_list)}.set{chunks4}
+chunks4.map{chr,bfiles -> tuple(chr,bfiles)}.combine(cov1).combine(pheno3).into{gwas_input1;gwas_input2}
+//gwas_input1.view()
+
+process ori_gwas {
+
+executor='slurm'
+queueSize='1818'
+submitRateLimit='400sec'
+jobName='gwas1'
+cpus='4'
+clusterOptions  "-A p33 -t 8:00:00 --mem-per-cpu 8000M"
+
+publishDir params.out, mode:'copy'
+
+input:
+tuple val(chr),path(bfiles),path(cov),path(pheno) from gwas_input1
+
+output:
+tuple val("${chr}"),path("${chr}*.*") optional true into first_gwas
+
+script:
+def (beds,bim,fam,log)=bfiles
+bed=beds.name.split('\\.')[0]
+"""
+plink2 --bfile ${bed}.csv --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${bed}_glm --threads 4 --memory 7600
+"""
+}
+
+process permutations {
+executor='slurm'
+queueSize='2002'
+submitRateLimit='400sec'
+jobName='permute'
+cpus='1'
+clusterOptions  "-A p33 -t 12:00:00 --mem-per-cpu 2000M"
+
+publishDir params.out, mode:'copy'
+
+input:
+tuple val(chr),path(bfiles) from chunks5
+
+output:
+tuple val("${chr}"),path("${chr}*.*") optional true into permuted
+
+script:
+def (beds,bim,fam,log)=bfiles
+bed=beds.name.split('\\.')[0]
+"""
+python /cluster/projects/p33/users/alexeas/elleke/src/permute_bed.py --bfile ${bed}.csv --out ${bed}_permuted
+"""
+}
+*/
+Channel.fromFilePairs("${params.out}/c*chunk*_permuted.{bed,bim,fam}",size:3).map{group_key,file_list -> tuple(group_key.replaceAll(/^*\.chunk*\.csv/,""),file_list)}.set{permuted}
+permuted.combine(cov2).combine(pheno4).into{permuted_input1;permuted_input2}
+
+process permuted_gwas {
+
+executor='slurm'
+queueSize='1818'
+submitRateLimit='400sec'
+jobName='gwas2'
+cpus='4' 
+clusterOptions  "-A p33 -t 8:00:00 --mem-per-cpu 8000M"
+
+publishDir params.out, mode:'copy'
+
+input:
+tuple val(chr),path(bfiles),path(cov),path(pheno) from permuted_input1
+
+output:
+tuple val("${chr}"),path("${chr}*.*") optional true into second_gwas
+
+script:
+def (beds,bim,fam,log)=bfiles
+bed=beds.name.split('\\.')[0]
+"""
+plink2 --bfile ${bed} --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${bed} --threads 4 --memory 7600
+"""
+}
+
+Channel.fromPath("${params.out}/c*_glm*.glm.linear").map{file -> tuple(file, file.name)}.map{chr,trait -> tuple(chr,trait.split('\\.')[1].replaceAll("[()]", "_"))}.map{chr,trait -> tuple(trait,chr)}.groupTuple().set{merge_in1}
+Channel.fromPath("${params.out}/c*_permuted*.glm.linear").map{file -> tuple(file, file.name)}.map{chr,trait -> tuple(chr,trait.split('\\.')[1].replaceAll("[()]", "_"))}.map{chr,trait -> tuple(trait,chr)}.groupTuple().set{merge_in3}
+//first_gwas.transpose().map{chr,trait -> tuple(trait.grep(~/*.linear/).split('\\.')[1],trait,chr)}.groupTuple().into{merge_in1;merge_in2}
+
+process merge_chunks1 {
+
+executor='slurm'
+queueSize='10'
+jobName='merge_ch1'
+cpus='1'
+clusterOptions  "-A p33 -t 24:00:00 --mem-per-cpu 32000M"
+
+publishDir params.out3, mode:'copy'
+
+input:
+tuple val(trait),path(sumstats) from merge_in1
+
+output:
+tuple val("${trait}"),path("${trait}*.*") optional true into merge_out1
+
+script:
+"""
+python /cluster/projects/p33/users/mohammadzr/metabolomics/scripts/concatenate_chunks.py ${sumstats} ${trait}_combined_original.csv
+"""
+}
+//sed -e '1,\${/^\\#/d' -e '}' ${sumstats} | sort -k1,1n -k2,2n > ${trait}_combined_original.csv
+merge_out1.map{trt,smt -> tuple(smt.name.split('\\.')[1],smt,trt)}.groupTuple().set{z_in1}
+z_in1.map{csv,smt,trt -> tuple(csv,smt.size(),smt,trt)}.set{z_in3}
+//second_gwas.transpose().map{chr,trait -> tuple(trait.grep(~/*.linear/).split('\\.')[1],trait,chr)}.groupTuple().into{merge_in3;merge_in4}
+
+process merge_chunks2 {
+
+executor='slurm'
+ueueSize='10'
+jobName='merge_ch2'
+cpus='1'
+clusterOptions  "-A p33 -t 24:00:00 --mem-per-cpu 32000M"
+
+publishDir params.out4, mode:'copy'
+
+input:
+tuple val(trait),path(sumstats) from merge_in3
+
+output:
+tuple val("${trait}"),path("${trait}*.*") optional true into merge_out2,merge_out3
+
+script:
+"""
+python /cluster/projects/p33/users/mohammadzr/metabolomics/scripts/concatenate_chunks.py ${sumstats} ${trait}_combined_permuted.csv
+"""
+}
+
+//sed -e '1,\${/^\\#/d' -e '}' ${sumstats} | sort -k1,1n -k2,2n > ${trait}_combined_permuted.csv
+//merge_out2.map{trt,smt -> tuple(smt.name.split('\\.')[1],smt,trt)}.groupTuple().set{z_in2}
+//z_in2.map{csv,smt,trt -> tuple(csv,smt.size(),smt,trt)}.set{z_in4}
+Channel.fromPath("${params.out3}/*").map{smt -> tuple(smt.name.split('\\.')[1],smt)}.groupTuple().into{z_in2;z_in3}
+
+merge_zscores1=file('/cluster/projects/p33/users/mohammadzr/metabolomics/scripts/merge_zscores.py')
+process merge_zscores1 {
+executor='slurm'
+queueSize='10'
+jobName='merge_z'
+cpus='16'
+clusterOptions  "-A p33 -t 24:00:00 --mem-per-cpu 16000M"
+//clusterOptions  "-A p33 -t 24:00:00 --partition bigmem --mem-per-cpu 256000M"
+
+
+publishDir params.out5, mode:'copy'
+
+input:
+tuple val(trait1),path(sumstats1) from z_in3
+output:
+path("glm_original_combined_zscore.csv") optional true into z_out1,z_m1
+script:
+"""
+python ${merge_zscores1} ${sumstats1} glm_original_combined_zscore.csv
+"""
+}
+//echo "${sumstats1}" > "sumstats2merge.csv"
+//ARG=\$(awk 'BEGIN{ORS=""; N=11; print(N); for(i=1; i<${sz1}; i++) {N=N+13; print(","N)}}')
+//paste ${sumstats1} | cut -f \$ARG  > glm_original_gwas_tstat.csv
+//echo ${trait1} | sed -e 's/,/\\t/g;s/\\[\\|\\]//g' | cat - glm_original_gwas_tstat.csv > glm_original_gwas_zscore.csv
+Channel.fromPath("${params.out4}/*").map{smt -> tuple(smt.name.split('\\.')[1],smt)}.groupTuple().into{z_in4;z_in5}
+
+merge_zscores2=file('/cluster/projects/p33/users/mohammadzr/metabolomics/scripts/merge_zscores.py')
+
+process merge_zscores2 {
+executor='slurm'
+queueSize='10'
+jobName='merge_z'
+cpus='1'
+clusterOptions  "-A p33 -t 24:00:00 --mem-per-cpu 256000M"
+//clusterOptions  "-A p33 -t 24:00:00 --partition bigmem --mem-per-cpu 256000M"
+
+
+publishDir params.out5, mode:'copy'
+
+input:
+tuple val(trait2),path(sumstats2) from z_in4
+output:
+path("glm_permuted_combined_zscore.csv") optional true into z_out2
+script:
+"""
+python ${merge_zscores2} ${sumstats2} glm_permuted_combined_zscore.csv
+"""
+}
+
+//echo "${sumstats2}" > "sumstats2merge1.csv"
+//ARG=\$(awk 'BEGIN{ORS=""; N=11; print(N); for(i=1; i<${sz2}; i++) {N=N+13; print(","N)}}')
+//paste ${sumstats2} | cut -f \$ARG  > glm_permuted_gwas_tstat.csv
+//echo ${trait2} | sed -e 's/,/\\t/g;s/\\[\\|\\]//g' | cat - glm_permuted_gwas_tstat.csv > glm_permuted_gwas_zscore.csv
+order_zscore_cols=file('/cluster/projects/p33/users/mohammadzr/metabolomics/scripts/order_zscore_cols.py')
+
+process order_z {
+
+executor='slurm'
+queueSize='2'
+jobName='mostest'
+cpus='1'
+clusterOptions  "-A p33 -t 24:00:00 --mem-per-cpu 256000M"
+//clusterOptions  "-A p33 -t 24:00:00 --partition bigmem --mem-per-cpu 256000M"
+
+
+publishDir params.out5, mode:'copy'
+
+input:
+path(z1) from z_out1
+path(z2) from z_out2
+output:
+path("${z1}_ordered_cols.csv") optional true into z_m11,z_m12
+path("${z2}_ordered_cols.csv") optional true into z_m13,z_m14
+
+script:
+"""
+python ${order_zscore_cols} ${z1} ${z2} ${z1}_ordered_cols.csv ${z2}_ordered_cols.csv
+"""
+}
+
+
+//z_m11.view()
+channel.fromPath("${params.out4}/glm_original_combined_zscore.csv_ordered_cols.csv").into{original1;original2}
+channel.fromPath("${params.out4}/glm_permuted_combined_zscore.csv_ordered_cols.csv").set{permuted1}
+//z_m11.map{it}.splitCsv(sep:'\t',limit:1).map{(1..it.size()).findAll { it % 5 == 0 }.collect()}.set{m1}
+original1.map{it}.splitCsv(sep:'\t',limit:1).map{(1..it.size()).findAll { it % 5 == 0 }.collect()}.set{m1}
+//m1.transpose().flatten().combine(z_m12).combine(z_m13).into{m2;m3;m4}
+m1.transpose().flatten().combine(original2).combine(permuted1).into{m2;m3;m4}
+//m2.view()
+//z_m13.map{it}.splitCsv(sep:'\t',limit:1).map{(it.size())}.set{m14}
+channel.of(params.project).flatten().set{pro1}
+m2.combine(pro1).set{m5}
+//m5.view()
+
+process mostest {
+
+module 'MATLAB/2022b'
+executor='slurm'
+queueSize='49'
+jobName='mostest'
+cpus='32'
+clusterOptions  "-A p33 -t 16:00:00 --partition bigmem --mem-per-cpu 64000M"
+
+publishDir params.out4, mode:'copy'
+
+input:
+tuple val(a1),path(z1),path(z2),val(project1) from m5
+
+output:
+tuple val("${a1}"),path("*_${a1}.*") optional true into most
+
+script:
+"""
+matlab -nodisplay -nosplash -batch "zmat_orig_file='/cluster/projects/p33/users/mohammadzr/metabolomics/lipids/combined/zscores/glm_original_combined_zscore.csv_filtered_frq.csv';zmat_perm_file='/cluster/projects/p33/users/mohammadzr/metabolomics/lipids/combined/zscores/glm_permuted_combined_zscore.csv_filtered_frq.csv'; num_eigval_to_keep='${a1}'; out='${project1}_filtered${a1}'; run /cluster/projects/p33/users/mohammadzr/metabolomics/scripts/mostest_code/mostest_mental; exit"
+"""
+}
+
+merge_out3.map{it[1]}.flatten().first().set{in_n1}
+
+Channel.fromFilePairs("${params.out}/chr*unrelated_imp.{bed,bim,fam}",size:3).set{extracted_imp3}
+
+//extracted_imp3.view()
+
+extracted_imp3.map{it[1]}.map{it[1]}.flatten().toSortedList().set{in_bim1}
+//in_bim1.view()
+
+process get_n {
+beforeScript 'source /cluster/projects/p33/users/mohammadzr/envs/nextf/bin/activate'
+executor='slurm'
+queueSize='2'
+jobName='mostest'
+cpus='2'
+clusterOptions  "-A p33 -t 24:00:00 --mem-per-cpu 8000M"
+
+publishDir params.out, mode:'copy'
+
+input:
+file(n1) from in_n1
+file(b1) from in_bim1
+output:
+tuple path("variant_sample.csv"),path("bim_for_convert.bim") optional true into bim_and_n
+
+script:
+"""
+awk -v OFS='\t' '{print \$3,\$8}' ${n1} > variant_sample.csv
+cat ${b1} | sort -k1,1n -k2,4n > bim_for_convert.bim
+"""
+}
+
+
+Channel.fromPath('/cluster/projects/p33/users/mohammadzr/metabolomics/lipids/sep13/original/*').set{munge1}
+
+munge1.map{smt -> tuple(smt.name.split('\\.')[0].replaceAll(/_combined_original/,""),smt)}.groupTuple().into{munge_in1;munge_in2}
+
+process munging {
+beforeScript 'source /cluster/projects/p33/users/mohammadzr/ldsr/bin/activate'
+executor='slurm'
+queueSize='200'
+jobName='munge'
+cpus='1'
+clusterOptions  "-A p33 -t 24:00:00 --mem-per-cpu 16000M"
+
+publishDir params.out6, mode:'copy'
+
+input:
+tuple val(st1), path(smt1) from munge_in1
+output:
+tuple val("${st1}"),path("${st1}_munged.log"),path("${st1}_munged.sumstats.gz") optional true into munge_out1,munge_out2
+
+script:
+"""
+python /cluster/projects/p33/users/mohammadzr/md_cvd/enrichment_test/references/ldsc-master/munge_sumstats.py --sumstats ${smt1} --out ${st1}_munged --merge-alleles /cluster/projects/p33/users/mohammadzr/ldsc/w_hm3.snplist --snp ID --N-col OBS_CT --a1 A1 --a2 REF --p P
+"""
+}
+*/
+//munge_in2.join(munge_out1,by:0).into{rg_in1;rg_in2}
+Channel.fromPath('/cluster/projects/p33/users/mohammadzr/metabolomics/lipids/sep13/rg/*gz').set{rg_in3}
+rg_in3.map{smt -> tuple(smt.name.split('\\.')[0].replaceAll(/_munged/,""),smt)}.groupTuple().into{rg_in4;rg_in5}
+rg_in4.combine(rg_in5).set{rg_in6}
+
+ldsc=file('/cluster/projects/p33/users/mohammadzr/md_cvd/enrichment_test/references/ldsc-master/ldsc.py')
+process rg1 {
+beforeScript 'source /cluster/projects/p33/users/mohammadzr/ldsr/bin/activate'
+executor='slurm'
+queueSize='3636'
+jobName='rg'
+cpus='1'
+clusterOptions  "-A p33_tsd -t 00:40:00 --mem-per-cpu 16000M"
+
+publishDir params.out6, mode:'copy'
+
+input:
+tuple val(st1), path(mng1, stageAs: "in1/*"), val(st2), path(mng2, stageAs: "in2/*") from rg_in6
+output:
+tuple val("${st1}"),path("${st1}*") optional true into rg_out1,rg_out2
+
+script:
+"""
+python ${ldsc} --rg ${mng1},${mng2} --out ${st1}-${st2} --ref-ld-chr /cluster/projects/p33/users/mohammadzr/ldsc/eur_w_ld_chr/ --w-ld-chr /cluster/projects/p33/users/mohammadzr/ldsc/eur_w_ld_chr/
+"""
+}
+/*
+rg_out1.map{tr -> tr[1]}.collect().set{rg_in7}
+rg_out2.map{tr -> tr[0]}.unique().collect().set{rg_in8}
+rg_in7.subscribe{it}.set{file_paths}
+rg_in8.subscribe{it}.set{trait_names}
+
+process tofiles {
+
+executor='local'
+queueSize='1'
+//jobName='genetic-rg'
+//cpus='1'
+//clusterOptions  "-A p33 -t 24:40:00 --mem-per-cpu 16000M"
+
+publishDir params.out6, mode:'copy'
+
+input:
+val(fp) from file_paths
+val(tn) from trait_names
+output:
+path('log_file_paths.csv') optional true into log_path
+path('trait_names_only.csv') optional true into trait_file
+
+script:
+"""
+echo ${fp} | sed 's/, /\\n/g' | sed 's/\\[//g' | sed 's/\\]//g' | sed 's/.*\\//\\/cluster\\/projects\\/p33\\/users\\/mohammadzr\\/metabolomics\\/lipids\\/combined\\/rg\\//g' > log_file_paths.csv
+echo ${tn} | sed 's/, /\\n/g' | sed 's/\\[//g' | sed 's/\\]//g' > trait_names_only.csv
+"""
+}
+//log_path.view()
+//trait_file.view()
+extract_rg=file('/cluster/projects/p33/users/mohammadzr/metabolomics/scripts/extract_genetic_cor.py')
+
+process rg2 {
+
+executor='local'
+queueSize='1'
+//jobName='genetic-rg'
+//cpus='1'
+//clusterOptions  "-A p33 -t 24:40:00 --mem-per-cpu 16000M"
+
+publishDir params.out5, mode:'copy'
+
+input:
+//val(st) from rg_in8
+path(rg) from rg_in7
+output:
+path('genetic_correlations_matrix.csv') optional true into rg_out3
+//path('pval_genetic_correlations_matrix.csv') optional true into rg_out4
+//path('heritability_matrix.csv') optional true into rg_out5
+script:
+"""
+python ${extract_rg} ${rg} genetic_correlations_matrix.csv
+"""
+}
+
+
+process get_frq {
+
+executor='slurm'
+queueSize='22'
+jobName='extraction'
+cpus='8'
+clusterOptions  "-A p33 -t 24:00:00 --mem-per-cpu 16000M"
+
+publishDir params.out, mode:'copy'
+
+input:
+tuple val(chr),path(bgen),path(sample),path(fam) from bgen4
+
+output:
+tuple val("${chr}"),path("${chr}*.*") optional true into frq1,frq2,frq3
+
+script:
+"""
+plink2 --bgen ${bgen} ref-first --sample ${sample} --keep ${fam} --freq --out "${chr}_frq" --threads 8 --memory 15000
+"""
+}
+frq1.view()
+*/
