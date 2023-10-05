@@ -46,6 +46,7 @@ plink2 --bfile ${bed} --glm omit-ref hide-covar --covar ${cov} --covar-variance-
 Then merge chunks/chromosome:
 
 python concatenate_chunks.py ${sumstats} ${trait}_combined_original.csv
+
 python concatenate_chunks.py ${sumstats} ${trait}_combined_permuted.csv
 
 ##### Upto step 5 is basic. These outputs can used in several downstream analysis 
