@@ -12,27 +12,39 @@ Create your covariate csv file, e.g. age, sex, 20 genetic principal components: 
 Process your phenotype. Rename columns with actual phenotype names. Make sure to replace any other name that indicates your subjects e.g. "eid" with "IID" and dublicate this column and name it "FID". "FID" and "IID" values has to be integer type. Phenotype csv file must be tab or space delimited. Transform phenotype values by Rank-Based Inverse Normal Transformation. (If you already have a phenotype and a covariate table ignore these two steps)  
 
 #### Step 3:
-Create unrelated individuals (king cutoff 0.05) in the genotype file and then extract those induviduals from the imputed files. In ukb, we merged chr 1-22 together using merge-list in plink and used king 0.05 flag to create a list of unrelated individuals and then extracted those individuals from the imputed bgen files. Then we removed rare and duplicated variants. Example code: 
+Create unrelated individuals (king cutoff 0.05) in the genotype file and then extract those induviduals from the imputed files. In ukb, we merged chr 1-22 together using merge-list in plink and used king 0.05 flag to create a list of unrelated individuals and then extracted those individuals from the imputed bgen files. (If we already have a list of unrelated individuals, this step is not needed) Then we removed rare and duplicated variants (This is mandetory). Example code: 
+
 plink --merge-list ${merge_in} --threads 16 --keep ${pheno} --make-bed --out ${outPrefix}
+
 plink2 --bfile ${inprefix} --king-cutoff 0.05 --make-just-fam --out ${outPrefix} --threads 16 --memory 31000
+
 plink2 --bgen ${bgen} ref-first --sample ${sample} --keep ${fam} --mac 20 --make-bed --out "${chr}_unrelated_imp" --threads 8
+
 plink2 --bed ${beds} --bim ${bims} --fam ${fams} --keep ${pheno} --mac 20 --maf 0.05 --rm-dup 'force-first' --make-bed --out ${chr}_unrelated_nodup --threads 8 --memory 15000
 
  
 
 #### Step 4: 
 Run univariate gwas, create permuted genotype (https://github.com/precimed/mostest/blob/mental/mental/permute_bed.py) from the same input (creating chunks of 10K snps using make_chunks_by_snps.py script would be helpful before this) Example code:
-create chunks of 10K snps: python make_chunks_by_snps.py ${bims}
+create chunks of 10K snps: 
+python make_chunks_by_snps.py ${bims}
+
 plink --bed ${bed} --bim ${bim} --fam ${fam} --extract ${chunk} --make-bed --out "${chunk}" --threads 4
+
 plink2 --bfile ${bed} --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${bed}_glm --threads 4 --memory 7600
+
 python permute_bed.py --bfile ${bed}.csv --out ${bed}_permuted
+
 plink2 --bfile ${bed} --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${bed} --threads 4 --memory 7600
 
 
 #### Step 5:
 Run univariate gwas on the permuted genotype
+
 plink2 --bfile ${bed} --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${bed} --threads 4 --memory 7600
+
 Then merge chunks/chromosome:
+
 python concatenate_chunks.py ${sumstats} ${trait}_combined_original.csv
 python concatenate_chunks.py ${sumstats} ${trait}_combined_permuted.csv
 
