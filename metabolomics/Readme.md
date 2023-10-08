@@ -1,5 +1,5 @@
 ### This repo contains an overview of the steps (incl. required code) to run uni- and multivariate GWAS. 
-### Here, we focus on Nightingale NMR data, though of course the steps involved are the same for any set of measures suitable for multivariate GWAS
+Here, we focus on Nightingale NMR data, though of course the steps involved are the same for any set of measures suitable for multivariate GWAS
 
 #### Step 1: Select phenotype and covariate data
 Select all 249 Nightingale markers and create a 'phenotypes' dataframe (rows subjects, columns markers).
@@ -14,9 +14,11 @@ python ukb_helper.py pheno --out my_pheno --input /ess/p33/data/durable/s3-api/u
 python ukb_helper.py pheno --input /ess/p33/data/durable/s3-api/ukblake/phenotypes/*csv --fields 21022 31 22009 --out my_cov
 ```
 
-# Note: in this project, we are interested in two variations on the main analysis: 1) sex-specific, and 2) covaried for BMI. 
-# for 1): simply create two phenotype files, one for each sex, and run through the steps below for both of them. Drop the sex covariate from covariates file
-# for 2): run through the exact same steps as for the main analysis, but include BMI in the covariates file. In UKB field 21001.
+Note: in this project, we are interested in two variations on the main analysis: 1) sex-specific, and 2) covaried for BMI. 
+
+For 1): simply create two phenotype files, one for each sex, and run through the steps below for both of them. Drop the sex covariate from covariates file
+
+For 2): run through the exact same steps as for the main analysis, but include BMI in the covariates file. In UKB field 21001.
 
 #### Step 2: Some light formatting of this data
 Ensure phenotype columns have informative names. For UKB, we replace field IDs with biomarker names at this point (underscores okay, no other special characters). See the 'dictionary' file for the names we use. In line with Plink, subject ID columns in both the phenotype and covariate dataframe should be named "IID". Duplicate this column and name it "FID".
