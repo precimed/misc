@@ -36,13 +36,13 @@ Create a list of unrelated individuals (king cutoff 0.05) based on the genotype 
 ```
 plink --merge-list ${merge_in} --threads 16 --keep ${pheno} --make-bed --out ${outPrefix}
 plink2 --bfile ${inprefix} --king-cutoff 0.05 --make-just-fam --out ${outPrefix} --threads 16 --memory 31000
-plink2 --bgen ${bgen} ref-first --sample ${sample} --keep ${fam} --mac 20 --make-bed --out "${chr}_unrelated_imp" --threads 8
+plink2 --bgen ${bgen} ref-first --sample ${sample} --keep ${fam} --make-bed --out "${chr}_unrelated_imp" --threads 8
 ```
 
-Apply some variant filtering, removing rare and duplicated variants.
+Apply some variant filtering, removing variants that are rare (maf .005), duplicated, or often missing (geno .05). We also propose to include a filter for removing individuals with much missingness (mind .1). We do note that applicability of such filters is a bit dependent on sample characteristics, data quality, and previous QC steps. 
 
 ```
-plink2 --bed ${beds} --bim ${bims} --fam ${fams} --keep ${pheno} --mac 20 --maf 0.005 --rm-dup 'force-first' --make-bed --out ${chr}_unrelated_nodup --threads 8 --memory 15000
+plink2 --bed ${beds} --bim ${bims} --fam ${fams} --keep ${pheno} --maf 0.005 --rm-dup 'force-first' --geno .05 --mind .1 --make-bed --out ${chr}_unrelated_nodup --threads 8 --memory 15000
 ```
 
 #### Step 4: Run univariate GWAS on permuted and unpermuted genotype data
@@ -74,7 +74,7 @@ python concatenate_chunks.py ${sumstats} ${trait}_combined_original.csv
 python concatenate_chunks.py ${sumstats} ${trait}_combined_permuted.csv
 ```
 
-##### That was it! At least for the purposes of creating the sumstats files needed for downstream analyses. Below steps for running MOSTest, but this is not needed at this time.
+##### That was it! At least for the purposes of creating the sumstats files needed for downstream analyses. Below steps for running MOSTest (to do: write up details), but this is not needed at this time.
 
 #### Step 6: Extract z-scores from all univariate GWAS (permuted and unpermuted)
 
