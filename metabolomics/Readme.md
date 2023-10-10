@@ -34,36 +34,36 @@ Write the resulting data to text files (one for phenotypes, one for covariates),
 Create a list of unrelated individuals (king cutoff 0.05) based on the genotype file and then extract those individuals from the imputed files. In UKB, we first merged chr 1-22 together.  Example code: 
 
 ```
-plink --merge-list ${merge_in} --threads 16 --keep ${pheno} --make-bed --out ${outPrefix}
-plink2 --bfile ${inprefix} --king-cutoff 0.05 --make-just-fam --out ${outPrefix} --threads 16 --memory 31000
-plink2 --bgen ${bgen} ref-first --sample ${sample} --keep ${fam} --make-bed --out "${chr}_unrelated_imp" --threads 8
+plink --merge-list ${merge_in} --threads 16 --keep ${pheno} --make-bed --out ${merged_geno}
+plink2 --bfile ${merged_geno} --king-cutoff 0.05 --make-just-fam --out ${unrelated_geno} --threads 16 --memory 31000
+plink2 --bgen ${bgen} ref-first --sample ${sample} --keep ${unrelated_geno} --make-bed --out ${chr}_unrelated_imp --threads 8
 ```
 
 Apply some variant filtering, removing variants that are rare (maf .005), duplicated, or often missing (geno .05). We also propose to include a filter for removing individuals with much missingness (mind .1). We do note that applicability of such filters is a bit dependent on sample characteristics, data quality, and previous QC steps. 
 
 ```
-plink2 --bed ${beds} --bim ${bims} --fam ${fams} --keep ${pheno} --maf 0.005 --rm-dup 'force-first' --geno .05 --mind .1 --make-bed --out ${chr}_unrelated_nodup --threads 8 --memory 15000
+plink2 --bfile ${chr}_unrelated_imp --keep ${pheno} --maf 0.005 --rm-dup 'force-first' --geno .05 --mind .1 --make-bed --out ${chr}_unrelated_nodup --threads 8 --memory 15000
 ```
 
 #### Step 4: Run univariate GWAS on permuted and unpermuted genotype data
 To aid computation/permutation, first create chunks of 10K snps using [make_chunks_by_snps.py](https://github.com/precimed/misc/blob/main/metabolomics/make_chunks_by_snps.py) script:  
 
 ```
-python make_chunks_by_snps.py ${bims}
+python make_chunks_by_snps.py ${chr}_unrelated_imp_nodup.bim
 ```
 
 Run univariate GWAS on (chunks of) unpermuted data:
 
 ```
-plink --bed ${bed} --bim ${bim} --fam ${fam} --extract ${chunk} --make-bed --out "${chunk}" --threads 4
-plink2 --bfile ${bed} --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${bed}_glm --threads 4 --memory 7600
+plink --bfiles ${chr}_unrelated_imp_nodup --extract ${chunk} --make-bed --out "${chunk}" --threads 4
+plink2 --bfile ${chunk} --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${bed}_glm --threads 4 --memory 7600
 ```
 
 Create permuted genotype through our [permute_bed](https://github.com/precimed/mostest/blob/mental/mental/permute_bed.py) tool and run permuted GWAS:
 
 ```
-python permute_bed.py --bfile ${bed}.csv --out ${bed}_permuted
-plink2 --bfile ${bed} --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${bed} --threads 4 --memory 7600
+python permute_bed.py --bfile ${chunk} --out ${chunk}_permuted
+plink2 --bfile ${chunk}_permuted --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${bed} --threads 4 --memory 7600
 ```
 
 #### Step 5: Merge chunks/chromosome:
