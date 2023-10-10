@@ -56,22 +56,22 @@ Run univariate GWAS on (chunks of) unpermuted data:
 
 ```
 plink --bfiles ${chr}_unrelated_imp_nodup --extract ${chunk} --make-bed --out "${chunk}" --threads 4
-plink2 --bfile ${chunk} --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${bed}_glm --threads 4 --memory 7600
+plink2 --bfile ${chunk} --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${original}_glm --threads 4 --memory 7600
 ```
 
 Create permuted genotype through our [permute_bed](https://github.com/precimed/mostest/blob/mental/mental/permute_bed.py) tool and run permuted GWAS:
 
 ```
 python permute_bed.py --bfile ${chunk} --out ${chunk}_permuted
-plink2 --bfile ${chunk}_permuted --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${bed} --threads 4 --memory 7600
+plink2 --bfile ${chunk}_permuted --glm omit-ref hide-covar --covar ${cov} --covar-variance-standardize --pheno ${pheno} --out ${permuted} --threads 4 --memory 7600
 ```
 
 #### Step 5: Merge chunks/chromosome:
 apply our [concatenate tool](https://github.com/precimed/misc/blob/main/metabolomics/concatenate_chunks.py): 
 
 ```
-python concatenate_chunks.py ${sumstats} ${trait}_combined_original.csv
-python concatenate_chunks.py ${sumstats} ${trait}_combined_permuted.csv
+python concatenate_chunks.py ${original}_glm ${trait}_combined_original.csv
+python concatenate_chunks.py ${permuted} ${trait}_combined_permuted.csv
 ```
 
 ##### That was it! At least for the purposes of creating the sumstats files needed for downstream analyses. Below steps for running MOSTest (to do: write up details), but this is not needed at this time.
