@@ -1,0 +1,250 @@
+sumstatName	fullName	fieldID	biomarker_id	prettyName	subgroup
+3_Hydroxybutyrate	3-Hydroxybutyrate	23474	bohbut	3-Hydroxybutyrate	Ketone bodies
+Acetate	Acetate	23475	ace	Acetate	Ketone bodies
+Acetoacetate	Acetoacetate	23476	acace	Acetoacetate	Ketone bodies
+Acetone	Acetone	23477	acetone	Acetone	Ketone bodies
+Alanine	Alanine	23460	ala	Alanine	Amino acids
+Albumin	Albumin	23479	alb	Albumin	Fluid balance
+Apolipoprotein_A1	Apolipoprotein A1	23440	apoa1	ApoA1	Apolipoproteins
+Apolipoprotein_B	Apolipoprotein B	23439	apob	ApoB	Apolipoproteins
+Apolipoprotein_B_to_Apolipoprotein_A1_ratio	Apolipoprotein B to Apolipoprotein A1 ratio	23441	apobbyapoa1	ApoB/ApoA1	Apolipoproteins
+Average_Diameter_for_HDL_Particles	Average Diameter for HDL Particles	23433	hdld	HDL particle size	Lipoprotein particle sizes
+Average_Diameter_for_LDL_Particles	Average Diameter for LDL Particles	23432	pureldld	LDL particle size	Lipoprotein particle sizes
+Average_Diameter_for_VLDL_Particles	Average Diameter for VLDL Particles	23431	vldld	VLDL particle size	Lipoprotein particle sizes
+Cholesterol_in_Chylomicrons_and_Extremely_Large_VLDL	Cholesterol in Chylomicrons and Extremely Large VLDL	23484	xxlvldlc	XXL-VLDL-C	Chylomicrons and extremely large VLDL (particle diameters from 75 nm upwards)
+Cholesterol_in_IDL	Cholesterol in IDL	23526	idlc	IDL-C	IDL (average diameter 28.6 nm)
+Cholesterol_in_Large_HDL	Cholesterol in Large HDL	23561	lhdlc	L-HDL-C	Large HDL (average diameter 12.1 nm)
+Cholesterol_in_Large_LDL	Cholesterol in Large LDL	23533	lldlc	L-LDL-C	Large LDL (average diameter 25.5 nm)
+Cholesterol_in_Large_VLDL	Cholesterol in Large VLDL	23498	lvldlc	L-VLDL-C	Large VLDL (average diameter 53.6 nm)
+Cholesterol_in_Medium_HDL	Cholesterol in Medium HDL	23568	mhdlc	M-HDL-C	Medium HDL (average diameter 10.9 nm)
+Cholesterol_in_Medium_LDL	Cholesterol in Medium LDL	23540	mldlc	M-LDL-C	Medium LDL (average diameter 23 nm)
+Cholesterol_in_Medium_VLDL	Cholesterol in Medium VLDL	23505	mvldlc	M-VLDL-C	Medium VLDL (average diameter 44.5 nm)
+Cholesterol_in_Small_HDL	Cholesterol in Small HDL	23575	shdlc	S-HDL-C	Small HDL (average diameter 8.7 nm)
+Cholesterol_in_Small_LDL	Cholesterol in Small LDL	23547	sldlc	S-LDL-C	Small LDL (average diameter 18.7 nm)
+Cholesterol_in_Small_VLDL	Cholesterol in Small VLDL	23512	svldlc	S-VLDL-C	Small VLDL (average diameter 36.8 nm)
+Cholesterol_in_Very_Large_HDL	Cholesterol in Very Large HDL	23554	xlhdlc	XL-HDL-C	Very large HDL (average diameter 14.3 nm)
+Cholesterol_in_Very_Large_VLDL	Cholesterol in Very Large VLDL	23491	xlvldlc	XL-VLDL-C	Very large VLDL (average diameter 64 nm)
+Cholesterol_in_Very_Small_VLDL	Cholesterol in Very Small VLDL	23519	xsvldlc	XS-VLDL-C	Very small VLDL (average diameter 31.3 nm)
+Cholesterol_to_Total_Lipids_in_Chylomicrons_and_Extremely_Large_VLDL_percentage	Cholesterol to Total Lipids in Chylomicrons and Extremely Large VLDL percentage	23580	xxlvldlcpct	XXL-VLDL-C %	Chylomicrons and extremely large VLDL ratios
+Cholesterol_to_Total_Lipids_in_IDL_percentage	Cholesterol to Total Lipids in IDL percentage	23610	idlcpct	IDL-C %	IDL ratios
+Cholesterol_to_Total_Lipids_in_Large_HDL_percentage	Cholesterol to Total Lipids in Large HDL percentage	23635	lhdlcpct	L-HDL-C %	Large HDL ratios
+Cholesterol_to_Total_Lipids_in_Large_LDL_percentage	Cholesterol to Total Lipids in Large LDL percentage	23615	lldlcpct	L-LDL-C %	Large LDL ratios
+Cholesterol_to_Total_Lipids_in_Large_VLDL_percentage	Cholesterol to Total Lipids in Large VLDL percentage	23590	lvldlcpct	L-VLDL-C %	Large VLDL ratios
+Cholesterol_to_Total_Lipids_in_Medium_HDL_percentage	Cholesterol to Total Lipids in Medium HDL percentage	23640	mhdlcpct	M-HDL-C %	Medium HDL ratios
+Cholesterol_to_Total_Lipids_in_Medium_LDL_percentage	Cholesterol to Total Lipids in Medium LDL percentage	23620	mldlcpct	M-LDL-C %	Medium LDL ratios
+Cholesterol_to_Total_Lipids_in_Medium_VLDL_percentage	Cholesterol to Total Lipids in Medium VLDL percentage	23595	mvldlcpct	M-VLDL-C %	Medium VLDL ratios
+Cholesterol_to_Total_Lipids_in_Small_HDL_percentage	Cholesterol to Total Lipids in Small HDL percentage	23645	shdlcpct	S-HDL-C %	Small HDL ratios
+Cholesterol_to_Total_Lipids_in_Small_LDL_percentage	Cholesterol to Total Lipids in Small LDL percentage	23625	sldlcpct	S-LDL-C %	Small LDL ratios
+Cholesterol_to_Total_Lipids_in_Small_VLDL_percentage	Cholesterol to Total Lipids in Small VLDL percentage	23600	svldlcpct	S-VLDL-C %	Small VLDL ratios
+Cholesterol_to_Total_Lipids_in_Very_Large_HDL_percentage	Cholesterol to Total Lipids in Very Large HDL percentage	23630	xlhdlcpct	XL-HDL-C %	Very large HDL ratios
+Cholesterol_to_Total_Lipids_in_Very_Large_VLDL_percentage	Cholesterol to Total Lipids in Very Large VLDL percentage	23585	xlvldlcpct	XL-VLDL-C %	Very large VLDL ratios
+Cholesterol_to_Total_Lipids_in_Very_Small_VLDL_percentage	Cholesterol to Total Lipids in Very Small VLDL percentage	23605	xsvldlcpct	XS-VLDL-C %	Very small VLDL ratios
+Cholesteryl_Esters_in_Chylomicrons_and_Extremely_Large_VLDL	Cholesteryl Esters in Chylomicrons and Extremely Large VLDL	23485	xxlvldlce	XXL-VLDL-CE	Chylomicrons and extremely large VLDL (particle diameters from 75 nm upwards)
+Cholesteryl_Esters_in_HDL	Cholesteryl Esters in HDL	23418	hdlce	HDL-CE	Cholesteryl esters
+Cholesteryl_Esters_in_IDL	Cholesteryl Esters in IDL	23527	idlce	IDL-CE	IDL (average diameter 28.6 nm)
+Cholesteryl_Esters_in_LDL	Cholesteryl Esters in LDL	23417	pureldlce	LDL-CE	Cholesteryl esters
+Cholesteryl_Esters_in_Large_HDL	Cholesteryl Esters in Large HDL	23562	lhdlce	L-HDL-CE	Large HDL (average diameter 12.1 nm)
+Cholesteryl_Esters_in_Large_LDL	Cholesteryl Esters in Large LDL	23534	lldlce	L-LDL-CE	Large LDL (average diameter 25.5 nm)
+Cholesteryl_Esters_in_Large_VLDL	Cholesteryl Esters in Large VLDL	23499	lvldlce	L-VLDL-CE	Large VLDL (average diameter 53.6 nm)
+Cholesteryl_Esters_in_Medium_HDL	Cholesteryl Esters in Medium HDL	23569	mhdlce	M-HDL-CE	Medium HDL (average diameter 10.9 nm)
+Cholesteryl_Esters_in_Medium_LDL	Cholesteryl Esters in Medium LDL	23541	mldlce	M-LDL-CE	Medium LDL (average diameter 23 nm)
+Cholesteryl_Esters_in_Medium_VLDL	Cholesteryl Esters in Medium VLDL	23506	mvldlce	M-VLDL-CE	Medium VLDL (average diameter 44.5 nm)
+Cholesteryl_Esters_in_Small_HDL	Cholesteryl Esters in Small HDL	23576	shdlce	S-HDL-CE	Small HDL (average diameter 8.7 nm)
+Cholesteryl_Esters_in_Small_LDL	Cholesteryl Esters in Small LDL	23548	sldlce	S-LDL-CE	Small LDL (average diameter 18.7 nm)
+Cholesteryl_Esters_in_Small_VLDL	Cholesteryl Esters in Small VLDL	23513	svldlce	S-VLDL-CE	Small VLDL (average diameter 36.8 nm)
+Cholesteryl_Esters_in_VLDL	Cholesteryl Esters in VLDL	23416	vldlce	VLDL-CE	Cholesteryl esters
+Cholesteryl_Esters_in_Very_Large_HDL	Cholesteryl Esters in Very Large HDL	23555	xlhdlce	XL-HDL-CE	Very large HDL (average diameter 14.3 nm)
+Cholesteryl_Esters_in_Very_Large_VLDL	Cholesteryl Esters in Very Large VLDL	23492	xlvldlce	XL-VLDL-CE	Very large VLDL (average diameter 64 nm)
+Cholesteryl_Esters_in_Very_Small_VLDL	Cholesteryl Esters in Very Small VLDL	23520	xsvldlce	XS-VLDL-CE	Very small VLDL (average diameter 31.3 nm)
+Cholesteryl_Esters_to_Total_Lipids_in_Chylomicrons_and_Extremely_Large_VLDL_percentage	Cholesteryl Esters to Total Lipids in Chylomicrons and Extremely Large VLDL percentage	23581	xxlvldlcepct	XXL-VLDL-CE %	Chylomicrons and extremely large VLDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_IDL_percentage	Cholesteryl Esters to Total Lipids in IDL percentage	23611	idlcepct	IDL-CE %	IDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_Large_HDL_percentage	Cholesteryl Esters to Total Lipids in Large HDL percentage	23636	lhdlcepct	L-HDL-CE %	Large HDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_Large_LDL_percentage	Cholesteryl Esters to Total Lipids in Large LDL percentage	23616	lldlcepct	L-LDL-CE %	Large LDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_Large_VLDL_percentage	Cholesteryl Esters to Total Lipids in Large VLDL percentage	23591	lvldlcepct	L-VLDL-CE %	Large VLDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_Medium_HDL_percentage	Cholesteryl Esters to Total Lipids in Medium HDL percentage	23641	mhdlcepct	M-HDL-CE %	Medium HDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_Medium_LDL_percentage	Cholesteryl Esters to Total Lipids in Medium LDL percentage	23621	mldlcepct	M-LDL-CE %	Medium LDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_Medium_VLDL_percentage	Cholesteryl Esters to Total Lipids in Medium VLDL percentage	23596	mvldlcepct	M-VLDL-CE %	Medium VLDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_Small_HDL_percentage	Cholesteryl Esters to Total Lipids in Small HDL percentage	23646	shdlcepct	S-HDL-CE %	Small HDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_Small_LDL_percentage	Cholesteryl Esters to Total Lipids in Small LDL percentage	23626	sldlcepct	S-LDL-CE %	Small LDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_Small_VLDL_percentage	Cholesteryl Esters to Total Lipids in Small VLDL percentage	23601	svldlcepct	S-VLDL-CE %	Small VLDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_Very_Large_HDL_percentage	Cholesteryl Esters to Total Lipids in Very Large HDL percentage	23631	xlhdlcepct	XL-HDL-CE %	Very large HDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_Very_Large_VLDL_percentage	Cholesteryl Esters to Total Lipids in Very Large VLDL percentage	23586	xlvldlcepct	XL-VLDL-CE %	Very large VLDL ratios
+Cholesteryl_Esters_to_Total_Lipids_in_Very_Small_VLDL_percentage	Cholesteryl Esters to Total Lipids in Very Small VLDL percentage	23606	xsvldlcepct	XS-VLDL-CE %	Very small VLDL ratios
+Citrate	Citrate	23473	cit	Citrate	Glycolysis related metabolites
+Clinical_LDL_Cholesterol	Clinical LDL Cholesterol	23404	clinldlc	Clinical LDL-C	Cholesterol
+Concentration_of_Chylomicrons_and_Extremely_Large_VLDL_Particles	Concentration of Chylomicrons and Extremely Large VLDL Particles	23481	xxlvldlp	XXL-VLDL-P	Chylomicrons and extremely large VLDL (particle diameters from 75 nm upwards)
+Concentration_of_HDL_Particles	Concentration of HDL Particles	23430	hdlp	HDL-P	Lipoprotein particle concentrations
+Concentration_of_IDL_Particles	Concentration of IDL Particles	23523	idlp	IDL-P	IDL (average diameter 28.6 nm)
+Concentration_of_LDL_Particles	Concentration of LDL Particles	23429	pureldlp	LDL-P	Lipoprotein particle concentrations
+Concentration_of_Large_HDL_Particles	Concentration of Large HDL Particles	23558	lhdlp	L-HDL-P	Large HDL (average diameter 12.1 nm)
+Concentration_of_Large_LDL_Particles	Concentration of Large LDL Particles	23530	lldlp	L-LDL-P	Large LDL (average diameter 25.5 nm)
+Concentration_of_Large_VLDL_Particles	Concentration of Large VLDL Particles	23495	lvldlp	L-VLDL-P	Large VLDL (average diameter 53.6 nm)
+Concentration_of_Medium_HDL_Particles	Concentration of Medium HDL Particles	23565	mhdlp	M-HDL-P	Medium HDL (average diameter 10.9 nm)
+Concentration_of_Medium_LDL_Particles	Concentration of Medium LDL Particles	23537	mldlp	M-LDL-P	Medium LDL (average diameter 23 nm)
+Concentration_of_Medium_VLDL_Particles	Concentration of Medium VLDL Particles	23502	mvldlp	M-VLDL-P	Medium VLDL (average diameter 44.5 nm)
+Concentration_of_Small_HDL_Particles	Concentration of Small HDL Particles	23572	shdlp	S-HDL-P	Small HDL (average diameter 8.7 nm)
+Concentration_of_Small_LDL_Particles	Concentration of Small LDL Particles	23544	sldlp	S-LDL-P	Small LDL (average diameter 18.7 nm)
+Concentration_of_Small_VLDL_Particles	Concentration of Small VLDL Particles	23509	svldlp	S-VLDL-P	Small VLDL (average diameter 36.8 nm)
+Concentration_of_VLDL_Particles	Concentration of VLDL Particles	23428	vldlp	VLDL-P	Lipoprotein particle concentrations
+Concentration_of_Very_Large_HDL_Particles	Concentration of Very Large HDL Particles	23551	xlhdlp	XL-HDL-P	Very large HDL (average diameter 14.3 nm)
+Concentration_of_Very_Large_VLDL_Particles	Concentration of Very Large VLDL Particles	23488	xlvldlp	XL-VLDL-P	Very large VLDL (average diameter 64 nm)
+Concentration_of_Very_Small_VLDL_Particles	Concentration of Very Small VLDL Particles	23516	xsvldlp	XS-VLDL-P	Very small VLDL (average diameter 31.3 nm)
+Creatinine	Creatinine	23478	crea	Creatinine	Fluid balance
+Degree_of_Unsaturation	Degree of Unsaturation	23443	unsat	Unsaturation	Fatty acids
+Docosahexaenoic_Acid	Docosahexaenoic Acid	23450	dha	DHA	Fatty acids
+Docosahexaenoic_Acid_to_Total_Fatty_Acids_percentage	Docosahexaenoic Acid to Total Fatty Acids percentage	23457	dhabyfa	DHA %	Fatty acid ratios
+Free_Cholesterol_in_Chylomicrons_and_Extremely_Large_VLDL	Free Cholesterol in Chylomicrons and Extremely Large VLDL	23486	xxlvldlfc	XXL-VLDL-FC	Chylomicrons and extremely large VLDL (particle diameters from 75 nm upwards)
+Free_Cholesterol_in_HDL	Free Cholesterol in HDL	23422	hdlfc	HDL-FC	Free cholesterol
+Free_Cholesterol_in_IDL	Free Cholesterol in IDL	23528	idlfc	IDL-FC	IDL (average diameter 28.6 nm)
+Free_Cholesterol_in_LDL	Free Cholesterol in LDL	23421	pureldlfc	LDL-FC	Free cholesterol
+Free_Cholesterol_in_Large_HDL	Free Cholesterol in Large HDL	23563	lhdlfc	L-HDL-FC	Large HDL (average diameter 12.1 nm)
+Free_Cholesterol_in_Large_LDL	Free Cholesterol in Large LDL	23535	lldlfc	L-LDL-FC	Large LDL (average diameter 25.5 nm)
+Free_Cholesterol_in_Large_VLDL	Free Cholesterol in Large VLDL	23500	lvldlfc	L-VLDL-FC	Large VLDL (average diameter 53.6 nm)
+Free_Cholesterol_in_Medium_HDL	Free Cholesterol in Medium HDL	23570	mhdlfc	M-HDL-FC	Medium HDL (average diameter 10.9 nm)
+Free_Cholesterol_in_Medium_LDL	Free Cholesterol in Medium LDL	23542	mldlfc	M-LDL-FC	Medium LDL (average diameter 23 nm)
+Free_Cholesterol_in_Medium_VLDL	Free Cholesterol in Medium VLDL	23507	mvldlfc	M-VLDL-FC	Medium VLDL (average diameter 44.5 nm)
+Free_Cholesterol_in_Small_HDL	Free Cholesterol in Small HDL	23577	shdlfc	S-HDL-FC	Small HDL (average diameter 8.7 nm)
+Free_Cholesterol_in_Small_LDL	Free Cholesterol in Small LDL	23549	sldlfc	S-LDL-FC	Small LDL (average diameter 18.7 nm)
+Free_Cholesterol_in_Small_VLDL	Free Cholesterol in Small VLDL	23514	svldlfc	S-VLDL-FC	Small VLDL (average diameter 36.8 nm)
+Free_Cholesterol_in_VLDL	Free Cholesterol in VLDL	23420	vldlfc	VLDL-FC	Free cholesterol
+Free_Cholesterol_in_Very_Large_HDL	Free Cholesterol in Very Large HDL	23556	xlhdlfc	XL-HDL-FC	Very large HDL (average diameter 14.3 nm)
+Free_Cholesterol_in_Very_Large_VLDL	Free Cholesterol in Very Large VLDL	23493	xlvldlfc	XL-VLDL-FC	Very large VLDL (average diameter 64 nm)
+Free_Cholesterol_in_Very_Small_VLDL	Free Cholesterol in Very Small VLDL	23521	xsvldlfc	XS-VLDL-FC	Very small VLDL (average diameter 31.3 nm)
+Free_Cholesterol_to_Total_Lipids_in_Chylomicrons_and_Extremely_Large_VLDL_percentage	Free Cholesterol to Total Lipids in Chylomicrons and Extremely Large VLDL percentage	23582	xxlvldlfcpct	XXL-VLDL-FC %	Chylomicrons and extremely large VLDL ratios
+Free_Cholesterol_to_Total_Lipids_in_IDL_percentage	Free Cholesterol to Total Lipids in IDL percentage	23612	idlfcpct	IDL-FC %	IDL ratios
+Free_Cholesterol_to_Total_Lipids_in_Large_HDL_percentage	Free Cholesterol to Total Lipids in Large HDL percentage	23637	lhdlfcpct	L-HDL-FC %	Large HDL ratios
+Free_Cholesterol_to_Total_Lipids_in_Large_LDL_percentage	Free Cholesterol to Total Lipids in Large LDL percentage	23617	lldlfcpct	L-LDL-FC %	Large LDL ratios
+Free_Cholesterol_to_Total_Lipids_in_Large_VLDL_percentage	Free Cholesterol to Total Lipids in Large VLDL percentage	23592	lvldlfcpct	L-VLDL-FC %	Large VLDL ratios
+Free_Cholesterol_to_Total_Lipids_in_Medium_HDL_percentage	Free Cholesterol to Total Lipids in Medium HDL percentage	23642	mhdlfcpct	M-HDL-FC %	Medium HDL ratios
+Free_Cholesterol_to_Total_Lipids_in_Medium_LDL_percentage	Free Cholesterol to Total Lipids in Medium LDL percentage	23622	mldlfcpct	M-LDL-FC %	Medium LDL ratios
+Free_Cholesterol_to_Total_Lipids_in_Medium_VLDL_percentage	Free Cholesterol to Total Lipids in Medium VLDL percentage	23597	mvldlfcpct	M-VLDL-FC %	Medium VLDL ratios
+Free_Cholesterol_to_Total_Lipids_in_Small_HDL_percentage	Free Cholesterol to Total Lipids in Small HDL percentage	23647	shdlfcpct	S-HDL-FC %	Small HDL ratios
+Free_Cholesterol_to_Total_Lipids_in_Small_LDL_percentage	Free Cholesterol to Total Lipids in Small LDL percentage	23627	sldlfcpct	S-LDL-FC %	Small LDL ratios
+Free_Cholesterol_to_Total_Lipids_in_Small_VLDL_percentage	Free Cholesterol to Total Lipids in Small VLDL percentage	23602	svldlfcpct	S-VLDL-FC %	Small VLDL ratios
+Free_Cholesterol_to_Total_Lipids_in_Very_Large_HDL_percentage	Free Cholesterol to Total Lipids in Very Large HDL percentage	23632	xlhdlfcpct	XL-HDL-FC %	Very large HDL ratios
+Free_Cholesterol_to_Total_Lipids_in_Very_Large_VLDL_percentage	Free Cholesterol to Total Lipids in Very Large VLDL percentage	23587	xlvldlfcpct	XL-VLDL-FC %	Very large VLDL ratios
+Free_Cholesterol_to_Total_Lipids_in_Very_Small_VLDL_percentage	Free Cholesterol to Total Lipids in Very Small VLDL percentage	23607	xsvldlfcpct	XS-VLDL-FC %	Very small VLDL ratios
+Glucose	Glucose	23470	glc	Glucose	Glycolysis related metabolites
+Glutamine	Glutamine	23461	gln	Glutamine	Amino acids
+Glycine	Glycine	23462	gly	Glycine	Amino acids
+Glycoprotein_Acetyls	Glycoprotein Acetyls	23480	gp	Glycoprotein acetyls	Inflammation
+HDL_Cholesterol	HDL Cholesterol	23406	hdlc	HDL-C	Cholesterol
+Histidine	Histidine	23463	his	Histidine	Amino acids
+Isoleucine	Isoleucine	23465	ile	Isoleucine	Branched-chain amino acids
+LDL_Cholesterol	LDL Cholesterol	23405	pureldlc	LDL-C	Cholesterol
+Lactate	Lactate	23471	lac	Lactate	Glycolysis related metabolites
+Leucine	Leucine	23466	leu	Leucine	Branched-chain amino acids
+Linoleic_Acid	Linoleic Acid	23449	la	LA	Fatty acids
+Linoleic_Acid_to_Total_Fatty_Acids_percentage	Linoleic Acid to Total Fatty Acids percentage	23456	labyfa	LA %	Fatty acid ratios
+Monounsaturated_Fatty_Acids	Monounsaturated Fatty Acids	23447	mufa	MUFA	Fatty acids
+Monounsaturated_Fatty_Acids_to_Total_Fatty_Acids_percentage	Monounsaturated Fatty Acids to Total Fatty Acids percentage	23454	mufabyfa	MUFA %	Fatty acid ratios
+Omega_3_Fatty_Acids	Omega-3 Fatty Acids	23444	faw3	Omega-3	Fatty acids
+Omega_3_Fatty_Acids_to_Total_Fatty_Acids_percentage	Omega-3 Fatty Acids to Total Fatty Acids percentage	23451	faw3byfa	Omega-3 %	Fatty acid ratios
+Omega_6_Fatty_Acids	Omega-6 Fatty Acids	23445	faw6	Omega-6	Fatty acids
+Omega_6_Fatty_Acids_to_Omega_3_Fatty_Acids_ratio	Omega-6 Fatty Acids to Omega-3 Fatty Acids ratio	23459	faw6byfa	Omega-6 %	Fatty acid ratios
+Omega_6_Fatty_Acids_to_Total_Fatty_Acids_percentage	Omega-6 Fatty Acids to Total Fatty Acids percentage	23452	faw6byfaw3	Omega-6/Omega-3	Fatty acid ratios
+Phenylalanine	Phenylalanine	23468	phe	Phenylalanine	Aromatic amino acids
+Phosphatidylcholines	Phosphatidylcholines	23437	pc	Phosphatidylcholines	Other lipids
+Phosphoglycerides	Phosphoglycerides	23434	pg	Phosphoglycerides	Other lipids
+Phospholipids_in_Chylomicrons_and_Extremely_Large_VLDL	Phospholipids in Chylomicrons and Extremely Large VLDL	23483	xxlvldlpl	XXL-VLDL-PL	Chylomicrons and extremely large VLDL (particle diameters from 75 nm upwards)
+Phospholipids_in_HDL	Phospholipids in HDL	23414	hdlpl	HDL-PL	Phospholipids
+Phospholipids_in_IDL	Phospholipids in IDL	23525	idlpl	IDL-PL	IDL (average diameter 28.6 nm)
+Phospholipids_in_LDL	Phospholipids in LDL	23413	pureldlpl	LDL-PL	Phospholipids
+Phospholipids_in_Large_HDL	Phospholipids in Large HDL	23560	lhdlpl	L-HDL-PL	Large HDL (average diameter 12.1 nm)
+Phospholipids_in_Large_LDL	Phospholipids in Large LDL	23532	lldlpl	L-LDL-PL	Large LDL (average diameter 25.5 nm)
+Phospholipids_in_Large_VLDL	Phospholipids in Large VLDL	23497	lvldlpl	L-VLDL-PL	Large VLDL (average diameter 53.6 nm)
+Phospholipids_in_Medium_HDL	Phospholipids in Medium HDL	23567	mhdlpl	M-HDL-PL	Medium HDL (average diameter 10.9 nm)
+Phospholipids_in_Medium_LDL	Phospholipids in Medium LDL	23539	mldlpl	M-LDL-PL	Medium LDL (average diameter 23 nm)
+Phospholipids_in_Medium_VLDL	Phospholipids in Medium VLDL	23504	mvldlpl	M-VLDL-PL	Medium VLDL (average diameter 44.5 nm)
+Phospholipids_in_Small_HDL	Phospholipids in Small HDL	23574	shdlpl	S-HDL-PL	Small HDL (average diameter 8.7 nm)
+Phospholipids_in_Small_LDL	Phospholipids in Small LDL	23546	sldlpl	S-LDL-PL	Small LDL (average diameter 18.7 nm)
+Phospholipids_in_Small_VLDL	Phospholipids in Small VLDL	23511	svldlpl	S-VLDL-PL	Small VLDL (average diameter 36.8 nm)
+Phospholipids_in_VLDL	Phospholipids in VLDL	23412	vldlpl	VLDL-PL	Phospholipids
+Phospholipids_in_Very_Large_HDL	Phospholipids in Very Large HDL	23553	xlhdlpl	XL-HDL-PL	Very large HDL (average diameter 14.3 nm)
+Phospholipids_in_Very_Large_VLDL	Phospholipids in Very Large VLDL	23490	xlvldlpl	XL-VLDL-PL	Very large VLDL (average diameter 64 nm)
+Phospholipids_in_Very_Small_VLDL	Phospholipids in Very Small VLDL	23518	xsvldlpl	XS-VLDL-PL	Very small VLDL (average diameter 31.3 nm)
+Phospholipids_to_Total_Lipids_in_Chylomicrons_and_Extremely_Large_VLDL_percentage	Phospholipids to Total Lipids in Chylomicrons and Extremely Large VLDL percentage	23579	xxlvldlplpct	XXL-VLDL-PL %	Chylomicrons and extremely large VLDL ratios
+Phospholipids_to_Total_Lipids_in_IDL_percentage	Phospholipids to Total Lipids in IDL percentage	23609	idlplpct	IDL-PL %	IDL ratios
+Phospholipids_to_Total_Lipids_in_Large_HDL_percentage	Phospholipids to Total Lipids in Large HDL percentage	23634	lhdlplpct	L-HDL-PL %	Large HDL ratios
+Phospholipids_to_Total_Lipids_in_Large_LDL_percentage	Phospholipids to Total Lipids in Large LDL percentage	23614	lldlplpct	L-LDL-PL %	Large LDL ratios
+Phospholipids_to_Total_Lipids_in_Large_VLDL_percentage	Phospholipids to Total Lipids in Large VLDL percentage	23589	lvldlplpct	L-VLDL-PL %	Large VLDL ratios
+Phospholipids_to_Total_Lipids_in_Medium_HDL_percentage	Phospholipids to Total Lipids in Medium HDL percentage	23639	mhdlplpct	M-HDL-PL %	Medium HDL ratios
+Phospholipids_to_Total_Lipids_in_Medium_LDL_percentage	Phospholipids to Total Lipids in Medium LDL percentage	23619	mldlplpct	M-LDL-PL %	Medium LDL ratios
+Phospholipids_to_Total_Lipids_in_Medium_VLDL_percentage	Phospholipids to Total Lipids in Medium VLDL percentage	23594	mvldlplpct	M-VLDL-PL %	Medium VLDL ratios
+Phospholipids_to_Total_Lipids_in_Small_HDL_percentage	Phospholipids to Total Lipids in Small HDL percentage	23644	shdlplpct	S-HDL-PL %	Small HDL ratios
+Phospholipids_to_Total_Lipids_in_Small_LDL_percentage	Phospholipids to Total Lipids in Small LDL percentage	23624	sldlplpct	S-LDL-PL %	Small LDL ratios
+Phospholipids_to_Total_Lipids_in_Small_VLDL_percentage	Phospholipids to Total Lipids in Small VLDL percentage	23599	svldlplpct	S-VLDL-PL %	Small VLDL ratios
+Phospholipids_to_Total_Lipids_in_Very_Large_HDL_percentage	Phospholipids to Total Lipids in Very Large HDL percentage	23629	xlhdlplpct	XL-HDL-PL %	Very large HDL ratios
+Phospholipids_to_Total_Lipids_in_Very_Large_VLDL_percentage	Phospholipids to Total Lipids in Very Large VLDL percentage	23584	xlvldlplpct	XL-VLDL-PL %	Very large VLDL ratios
+Phospholipids_to_Total_Lipids_in_Very_Small_VLDL_percentage	Phospholipids to Total Lipids in Very Small VLDL percentage	23604	xsvldlplpct	XS-VLDL-PL %	Very small VLDL ratios
+Polyunsaturated_Fatty_Acids	Polyunsaturated Fatty Acids	23446	pufa	PUFA	Fatty acids
+Polyunsaturated_Fatty_Acids_to_Monounsaturated_Fatty_Acids_ratio	Polyunsaturated Fatty Acids to Monounsaturated Fatty Acids ratio	23458	pufabymufa	PUFA/MUFA	Fatty acid ratios
+Polyunsaturated_Fatty_Acids_to_Total_Fatty_Acids_percentage	Polyunsaturated Fatty Acids to Total Fatty Acids percentage	23453	pufabyfa	PUFA %	Fatty acid ratios
+Pyruvate	Pyruvate	23472	pyr	Pyruvate	Glycolysis related metabolites
+Remnant_Cholesterol_Non_HDL_Non_LDL__Cholesterol	Remnant Cholesterol (Non-HDL Non-LDL -Cholesterol)	23402	remnantc	Remnant-C	Cholesterol
+Saturated_Fatty_Acids	Saturated Fatty Acids	23448	sfa	SFA	Fatty acids
+Saturated_Fatty_Acids_to_Total_Fatty_Acids_percentage	Saturated Fatty Acids to Total Fatty Acids percentage	23455	sfabyfa	SFA %	Fatty acid ratios
+Sphingomyelins	Sphingomyelins	23438	sm	Sphingomyelins	Other lipids
+Total_Cholesterol	Total Cholesterol	23400	totalc	Total-C	Cholesterol
+Total_Cholesterol_Minus_HDL_C	Total Cholesterol Minus HDL-C	23401	nonhdlc	non-HDL-C	Cholesterol
+Total_Cholines	Total Cholines	23436	cholines	Total cholines	Other lipids
+Total_Concentration_of_Branched_Chain_Amino_Acids_Leucine_+_Isoleucine_+_Valine	Total Concentration of Branched-Chain Amino Acids (Leucine + Isoleucine + Valine)	23464	totalbcaa	Total BCAA	Branched-chain amino acids
+Total_Concentration_of_Lipoprotein_Particles	Total Concentration of Lipoprotein Particles	23427	totalp	Total-P	Lipoprotein particle concentrations
+Total_Esterified_Cholesterol	Total Esterified Cholesterol	23415	totalce	Total-CE	Cholesteryl esters
+Total_Fatty_Acids	Total Fatty Acids	23442	totfa	Total fatty acids	Fatty acids
+Total_Free_Cholesterol	Total Free Cholesterol	23419	totalfc	Total-FC	Free cholesterol
+Total_Lipids_in_Chylomicrons_and_Extremely_Large_VLDL	Total Lipids in Chylomicrons and Extremely Large VLDL	23482	xxlvldll	XXL-VLDL-L	Chylomicrons and extremely large VLDL (particle diameters from 75 nm upwards)
+Total_Lipids_in_HDL	Total Lipids in HDL	23426	hdll	HDL-L	Total lipids
+Total_Lipids_in_IDL	Total Lipids in IDL	23524	idll	IDL-L	IDL (average diameter 28.6 nm)
+Total_Lipids_in_LDL	Total Lipids in LDL	23425	pureldll	LDL-L	Total lipids
+Total_Lipids_in_Large_HDL	Total Lipids in Large HDL	23559	lhdll	L-HDL-L	Large HDL (average diameter 12.1 nm)
+Total_Lipids_in_Large_LDL	Total Lipids in Large LDL	23531	lldll	L-LDL-L	Large LDL (average diameter 25.5 nm)
+Total_Lipids_in_Large_VLDL	Total Lipids in Large VLDL	23496	lvldll	L-VLDL-L	Large VLDL (average diameter 53.6 nm)
+Total_Lipids_in_Lipoprotein_Particles	Total Lipids in Lipoprotein Particles	23423	totall	Total-L	Total lipids
+Total_Lipids_in_Medium_HDL	Total Lipids in Medium HDL	23566	mhdll	M-HDL-L	Medium HDL (average diameter 10.9 nm)
+Total_Lipids_in_Medium_LDL	Total Lipids in Medium LDL	23538	mldll	M-LDL-L	Medium LDL (average diameter 23 nm)
+Total_Lipids_in_Medium_VLDL	Total Lipids in Medium VLDL	23503	mvldll	M-VLDL-L	Medium VLDL (average diameter 44.5 nm)
+Total_Lipids_in_Small_HDL	Total Lipids in Small HDL	23573	shdll	S-HDL-L	Small HDL (average diameter 8.7 nm)
+Total_Lipids_in_Small_LDL	Total Lipids in Small LDL	23545	sldll	S-LDL-L	Small LDL (average diameter 18.7 nm)
+Total_Lipids_in_Small_VLDL	Total Lipids in Small VLDL	23510	svldll	S-VLDL-L	Small VLDL (average diameter 36.8 nm)
+Total_Lipids_in_VLDL	Total Lipids in VLDL	23424	vldll	VLDL-L	Total lipids
+Total_Lipids_in_Very_Large_HDL	Total Lipids in Very Large HDL	23552	xlhdll	XL-HDL-L	Very large HDL (average diameter 14.3 nm)
+Total_Lipids_in_Very_Large_VLDL	Total Lipids in Very Large VLDL	23489	xlvldll	XL-VLDL-L	Very large VLDL (average diameter 64 nm)
+Total_Lipids_in_Very_Small_VLDL	Total Lipids in Very Small VLDL	23517	xsvldll	XS-VLDL-L	Very small VLDL (average diameter 31.3 nm)
+Total_Phospholipids_in_Lipoprotein_Particles	Total Phospholipids in Lipoprotein Particles	23411	totalpl	Total-PL	Phospholipids
+Total_Triglycerides	Total Triglycerides	23407	totaltg	Total triglycerides	Triglycerides
+Triglycerides_in_Chylomicrons_and_Extremely_Large_VLDL	Triglycerides in Chylomicrons and Extremely Large VLDL	23487	xxlvldltg	XXL-VLDL-TG	Chylomicrons and extremely large VLDL (particle diameters from 75 nm upwards)
+Triglycerides_in_HDL	Triglycerides in HDL	23410	hdltg	HDL-TG	Triglycerides
+Triglycerides_in_IDL	Triglycerides in IDL	23529	idltg	IDL-TG	IDL (average diameter 28.6 nm)
+Triglycerides_in_LDL	Triglycerides in LDL	23409	pureldltg	LDL-TG	Triglycerides
+Triglycerides_in_Large_HDL	Triglycerides in Large HDL	23564	lhdltg	L-HDL-TG	Large HDL (average diameter 12.1 nm)
+Triglycerides_in_Large_LDL	Triglycerides in Large LDL	23536	lldltg	L-LDL-TG	Large LDL (average diameter 25.5 nm)
+Triglycerides_in_Large_VLDL	Triglycerides in Large VLDL	23501	lvldltg	L-VLDL-TG	Large VLDL (average diameter 53.6 nm)
+Triglycerides_in_Medium_HDL	Triglycerides in Medium HDL	23571	mhdltg	M-HDL-TG	Medium HDL (average diameter 10.9 nm)
+Triglycerides_in_Medium_LDL	Triglycerides in Medium LDL	23543	mldltg	M-LDL-TG	Medium LDL (average diameter 23 nm)
+Triglycerides_in_Medium_VLDL	Triglycerides in Medium VLDL	23508	mvldltg	M-VLDL-TG	Medium VLDL (average diameter 44.5 nm)
+Triglycerides_in_Small_HDL	Triglycerides in Small HDL	23578	shdltg	S-HDL-TG	Small HDL (average diameter 8.7 nm)
+Triglycerides_in_Small_LDL	Triglycerides in Small LDL	23550	sldltg	S-LDL-TG	Small LDL (average diameter 18.7 nm)
+Triglycerides_in_Small_VLDL	Triglycerides in Small VLDL	23515	svldltg	S-VLDL-TG	Small VLDL (average diameter 36.8 nm)
+Triglycerides_in_VLDL	Triglycerides in VLDL	23408	vldltg	VLDL-TG	Triglycerides
+Triglycerides_in_Very_Large_HDL	Triglycerides in Very Large HDL	23557	xlhdltg	XL-HDL-TG	Very large HDL (average diameter 14.3 nm)
+Triglycerides_in_Very_Large_VLDL	Triglycerides in Very Large VLDL	23494	xlvldltg	XL-VLDL-TG	Very large VLDL (average diameter 64 nm)
+Triglycerides_in_Very_Small_VLDL	Triglycerides in Very Small VLDL	23522	xsvldltg	XS-VLDL-TG	Very small VLDL (average diameter 31.3 nm)
+Triglycerides_to_Phosphoglycerides_ratio	Triglycerides to Phosphoglycerides ratio	23435	tgbypg	TG/PG	Other lipids
+Triglycerides_to_Total_Lipids_in_Chylomicrons_and_Extremely_Large_VLDL_percentage	Triglycerides to Total Lipids in Chylomicrons and Extremely Large VLDL percentage	23583	xxlvldltgpct	XXL-VLDL-TG %	Chylomicrons and extremely large VLDL ratios
+Triglycerides_to_Total_Lipids_in_IDL_percentage	Triglycerides to Total Lipids in IDL percentage	23613	idltgpct	IDL-TG %	IDL ratios
+Triglycerides_to_Total_Lipids_in_Large_HDL_percentage	Triglycerides to Total Lipids in Large HDL percentage	23638	lhdltgpct	L-HDL-TG %	Large HDL ratios
+Triglycerides_to_Total_Lipids_in_Large_LDL_percentage	Triglycerides to Total Lipids in Large LDL percentage	23618	lldltgpct	L-LDL-TG %	Large LDL ratios
+Triglycerides_to_Total_Lipids_in_Large_VLDL_percentage	Triglycerides to Total Lipids in Large VLDL percentage	23593	lvldltgpct	L-VLDL-TG %	Large VLDL ratios
+Triglycerides_to_Total_Lipids_in_Medium_HDL_percentage	Triglycerides to Total Lipids in Medium HDL percentage	23643	mhdltgpct	M-HDL-TG %	Medium HDL ratios
+Triglycerides_to_Total_Lipids_in_Medium_LDL_percentage	Triglycerides to Total Lipids in Medium LDL percentage	23623	mldltgpct	M-LDL-TG %	Medium LDL ratios
+Triglycerides_to_Total_Lipids_in_Medium_VLDL_percentage	Triglycerides to Total Lipids in Medium VLDL percentage	23598	mvldltgpct	M-VLDL-TG %	Medium VLDL ratios
+Triglycerides_to_Total_Lipids_in_Small_HDL_percentage	Triglycerides to Total Lipids in Small HDL percentage	23648	shdltgpct	S-HDL-TG %	Small HDL ratios
+Triglycerides_to_Total_Lipids_in_Small_LDL_percentage	Triglycerides to Total Lipids in Small LDL percentage	23628	sldltgpct	S-LDL-TG %	Small LDL ratios
+Triglycerides_to_Total_Lipids_in_Small_VLDL_percentage	Triglycerides to Total Lipids in Small VLDL percentage	23603	svldltgpct	S-VLDL-TG %	Small VLDL ratios
+Triglycerides_to_Total_Lipids_in_Very_Large_HDL_percentage	Triglycerides to Total Lipids in Very Large HDL percentage	23633	xlhdltgpct	XL-HDL-TG %	Very large HDL ratios
+Triglycerides_to_Total_Lipids_in_Very_Large_VLDL_percentage	Triglycerides to Total Lipids in Very Large VLDL percentage	23588	xlvldltgpct	XL-VLDL-TG %	Very large VLDL ratios
+Triglycerides_to_Total_Lipids_in_Very_Small_VLDL_percentage	Triglycerides to Total Lipids in Very Small VLDL percentage	23608	xsvldltgpct	XS-VLDL-TG %	Very small VLDL ratios
+Tyrosine	Tyrosine	23469	tyr	Tyrosine	Aromatic amino acids
+VLDL_Cholesterol	VLDL Cholesterol	23403	vldlc	VLDL-C	Cholesterol
+Valine	Valine	23467	val	Valine	Branched-chain amino acids
